@@ -7,6 +7,9 @@ We plan to make a GUI that will provide a restaurant recommendation according to
 ## Project inspiration
 It's a service that we would use, and we wanted to work on data processing skills.
 
+## Initial sketch
+![Class diagram](./IMG_0106.jpg)
+
 ## Deliverables and due dates
 1. Create dataset - complete in class 4/10
 2. Sketch GUI - complete in class 4/10
