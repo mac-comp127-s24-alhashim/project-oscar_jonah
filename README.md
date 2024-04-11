@@ -10,6 +10,9 @@ It's a service that we would use, and we wanted to work on data processing skill
 ## Initial sketch
 ![Class diagram](./initialSketch.jpeg)
 
+## UML Diagram
+[Link to Google Drawing](https://docs.google.com/drawings/d/1m5bezcUkSXPUZrRYbPft9IrcASEWChUN1nWaEckvGho/edit?usp=sharing)
+
 ## Deliverables and due dates
 1. Create dataset - complete in class 4/10
 2. Sketch GUI - complete in class 4/10
