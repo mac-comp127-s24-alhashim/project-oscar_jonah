@@ -25,7 +25,7 @@ public class ButtonHelper {
      * @param mainButton select cuisine button, needed as parameter in order to replace it on canvas
      */
     public static void createDropdownMenu(GraphicsGroup viz, Button mainButton) {
-        String[] cuisines = {"American", "Italian", "Asian", "Mediterranean", "Mexican"};
+        String[] cuisines = {"American", "Italian", "Asian", "Mediterranean", "Mexican", "I don't care"};
         GraphicsGroup dropdown  = new GraphicsGroup();
         Rectangle background = new Rectangle(0,0,0,0);
         background.setFillColor(Color.LIGHT_GRAY);
