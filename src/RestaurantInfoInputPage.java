@@ -3,20 +3,24 @@ import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 
+/**
+ * Page for user to input cuisine and budget
+ */
 public class RestaurantInfoInputPage implements Page {
     double canvasWidth;
     double canvasHeight;
     RestaurantVisualization canvas;
 
+    /**
+     * Page for user to input cuisine and budget
+     * @param canvas extension of CanvasWindow, used to get dimensions and update visuals
+     */
     public RestaurantInfoInputPage(RestaurantVisualization canvas) {
         this.canvasWidth = canvas.getWidth();
         this.canvasHeight = canvas.getHeight();
         this.canvas = canvas;
     }
-    /**
-     * Page for user to input cuisine and budget
-     */
-    
+
     public GraphicsGroup makePage() {
 
         GraphicsGroup page = new GraphicsGroup();

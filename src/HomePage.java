@@ -10,6 +10,10 @@ public class HomePage implements Page {
     double canvasHeight;
     RestaurantVisualization canvas;
 
+    /**
+     * Landing page for user to either search for restaurant or get random recommendation
+     * @param canvas extension of CanvasWindow, used to get dimensions and update visuals
+     */
     public HomePage(RestaurantVisualization canvas) {
         this.canvasWidth = canvas.getWidth();
         this.canvasHeight = canvas.getHeight();
@@ -28,11 +32,11 @@ public class HomePage implements Page {
         page.add(title);
         Button start = ButtonHelper.createButton(page, "Start", canvasWidth/2, canvasHeight*0.5);
 
-        // TODO: Needs implementation
         Button randomChoice = ButtonHelper.createButton(page, "Give me a random restaurant", canvasWidth/2, canvasHeight*0.7); 
 
-        //TODO: make setPage() method
         start.onClick(() -> canvas.setPage(1));
+
+        //TODO: CHOOSE RANDOM RESTAURANT
         randomChoice.onClick(() -> canvas.setPage(3));
 
         return page;

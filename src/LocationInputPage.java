@@ -3,13 +3,19 @@ import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 
+/**
+ * Page for user to input prefered location of restaurant
+ */
 public class LocationInputPage implements Page {
 
     double canvasWidth;
     double canvasHeight;
     RestaurantVisualization canvas;
 
-
+    /**
+     * Page for user to input prefered location of restaurant
+     * @param canvas extension of CanvasWindow, used to get dimensions and update visuals
+     */
     public LocationInputPage(RestaurantVisualization canvas) {
         this.canvasWidth = canvas.getWidth();
         this.canvasHeight = canvas.getHeight();

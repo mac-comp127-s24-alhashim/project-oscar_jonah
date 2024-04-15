@@ -1,3 +1,4 @@
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.ui.Button;
 
@@ -10,7 +11,7 @@ public class RestaurantVisualization extends CanvasWindow {
     private Page[] pages = new Page[4];
 
     /**
-     * 
+     * Class that extends GraphicsGroup and creates the different navigation pages
      * @param canvas takes canvas to get dimensions and add visualizations
      * @param page integer that designates which page is being displayed
      */
@@ -27,19 +28,26 @@ public class RestaurantVisualization extends CanvasWindow {
         setPage(0);
     }
 
+    /**
+     * Changes which page is displayed on CanvasWindow
+     * @param page index of page in Array pages, used to select which page to display
+     */
     public void setPage(int page) {
         this.removeAll();
         if (page != 0) {
-            this.add(addHomeButton());
+            addHomeButton();
         }
         this.add(pages[page].makePage());
     }
 
-    private Button addHomeButton() {
+    /**
+     * Adds button to canvas to return to first page
+     */
+    private void addHomeButton() {
         Button homeButton = new Button("Return to start");
-        homeButton.setCenter(60, 15);
+        homeButton.setCenter(65, 15);
         homeButton.onClick(() -> setPage(0));
-        return homeButton;
+        this.add(homeButton);
     }
 
 }

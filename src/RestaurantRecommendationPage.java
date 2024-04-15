@@ -1,11 +1,21 @@
+
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 
-public class RestaurantRecommendationPage implements Page{
+/**
+ * Final page that displays information about restaurant recommendation
+ */
+public class RestaurantRecommendationPage implements Page {
     double canvasWidth;
     double canvasHeight;
     RestaurantVisualization canvas;
 
+    Restaurant restaurant;
+
+    /**
+     * Final page that displays information about restaurant recommendation
+     * @param canvas extension of CanvasWindow, used to get dimensions
+     */
     public RestaurantRecommendationPage(RestaurantVisualization canvas) {
         this.canvasWidth = canvas.getWidth();
         this.canvasHeight = canvas.getHeight();
@@ -14,6 +24,7 @@ public class RestaurantRecommendationPage implements Page{
     // TODO: MAKE THIS USE ACTUAL INFORMATION
     
     public GraphicsGroup makePage() {
+        
         GraphicsGroup page = new GraphicsGroup();
 
         GraphicsText name = new GraphicsText("Name");
