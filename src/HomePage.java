@@ -25,12 +25,14 @@ public class HomePage implements Page {
         GraphicsGroup page = new GraphicsGroup();
 
         GraphicsText title = new GraphicsText("Where to eat?");
+        title.setFontSize(35);
         title.setCenter(canvasWidth/2, canvasHeight*0.2);
         page.add(title);
         GraphicsText location = new GraphicsText("Twin Cities");
         location.setCenter(canvasWidth/2, canvasHeight*0.3);
         page.add(title);
         Button start = ButtonHelper.createButton(page, "Start", canvasWidth/2, canvasHeight*0.5);
+        
 
         Button randomChoice = ButtonHelper.createButton(page, "Give me a random restaurant", canvasWidth/2, canvasHeight*0.7); 
 

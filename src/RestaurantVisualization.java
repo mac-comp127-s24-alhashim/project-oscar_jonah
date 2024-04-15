@@ -2,6 +2,8 @@
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.ui.Button;
 
+import java.awt.Color;
+
 /**
  * Class that extends GraphicsGroup and creates the different navigation pages
  */
@@ -17,6 +19,7 @@ public class RestaurantVisualization extends CanvasWindow {
      */
     public RestaurantVisualization() {
         super("Restaurant Finder", 600, 500);
+        this.setBackground(Color.PINK);
         this.canvasWidth = this.getWidth();
         this.canvasHeight = this.getHeight();
 
