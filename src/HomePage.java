@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
@@ -36,10 +38,24 @@ public class HomePage implements Page {
 
         Button randomChoice = ButtonHelper.createButton(page, "Give me a random restaurant", canvasWidth/2, canvasHeight*0.7); 
 
-        start.onClick(() -> canvas.setPage(1));
+        start.onClick(() -> {
+            try {
+                canvas.setPage(1);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
 
         //TODO: CHOOSE RANDOM RESTAURANT
-        randomChoice.onClick(() -> canvas.setPage(3));
+        randomChoice.onClick(() -> {
+            try {
+                canvas.setPage(3);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
 
         return page;
     }

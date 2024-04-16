@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.ui.Button;
@@ -37,7 +39,14 @@ public class LocationInputPage implements Page {
 
         Button nextPage = ButtonHelper.createButton(page, "Continue", canvasWidth/2, canvasHeight*0.8);
 
-        nextPage.onClick(() -> canvas.setPage(3));
+        nextPage.onClick(() -> {
+            try {
+                canvas.setPage(3);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
 
         return page;
     }
