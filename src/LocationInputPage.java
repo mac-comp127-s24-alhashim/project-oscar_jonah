@@ -43,7 +43,6 @@ public class LocationInputPage implements Page {
             try {
                 canvas.setPage(3);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });

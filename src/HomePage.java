@@ -42,17 +42,14 @@ public class HomePage implements Page {
             try {
                 canvas.setPage(1);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
 
-        //TODO: CHOOSE RANDOM RESTAURANT
         randomChoice.onClick(() -> {
             try {
                 canvas.setPage(3);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });

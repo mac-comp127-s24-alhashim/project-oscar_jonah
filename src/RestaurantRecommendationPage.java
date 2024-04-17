@@ -1,8 +1,10 @@
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.TextAlignment;
 
 /**
  * Final page that displays information about restaurant recommendation
@@ -23,7 +25,6 @@ public class RestaurantRecommendationPage implements Page {
         this.canvasHeight = canvas.getHeight();
         this.canvas = canvas;
     }
-    // TODO: MAKE THIS USE ACTUAL INFORMATION
     
     public GraphicsGroup makePage() throws IOException {
         
@@ -35,12 +36,14 @@ public class RestaurantRecommendationPage implements Page {
         name.setCenter(canvasWidth/2, canvasHeight*0.2);
         page.add(name);
 
-        //TODO: MAKE THIS SHOW STARS INSTEAD OF WORDS
         GraphicsText rating = new GraphicsText("Yelp Rating: " + SpreadSheetReader.getInfo(randomChoice, "rating"));
         rating.setCenter(canvasWidth/2, canvasHeight*0.3);
         page.add(rating);
 
-        GraphicsText description = new GraphicsText(SpreadSheetReader.getInfo(randomChoice, "description"));
+        String descriptionRaw = SpreadSheetReader.getInfo(randomChoice, "description");
+        
+        GraphicsText description = new GraphicsText(formatDescription(descriptionRaw));
+        description.setAlignment(TextAlignment.CENTER); 
         description.setCenter(canvasWidth/2, canvasHeight*0.4);
         page.add(description);
 
@@ -72,5 +75,31 @@ public class RestaurantRecommendationPage implements Page {
         page.add(address);
 
         return page;
+    }
+
+    private String formatDescription(String description) {
+        int spaceCount = 1;
+        ArrayList<String> charList = new ArrayList<>();
+        for (char character: description.toCharArray()) {
+            if (character == ' ') {
+                spaceCount += 1;
+                if (spaceCount%9==0) {
+                    charList.add("\n");
+                }
+                else {
+                    charList.add(" ");
+                }
+            }
+            else {
+                charList.add(String.valueOf(character));
+            }
+        }
+        String newString = "";
+
+        for (String character: charList) {
+            newString += character;
+        }
+
+        return newString;
     }
 }
