@@ -1,38 +1,14 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.*;;
 
 /**
  * Helper class to read data from a spreadsheet.
  */
 public class SpreadSheetReader {
-    /**
-     * Prints all of the data in a given spreadsheet
-     */
-    // private void printAll() throws IOException {
-    //     String excelPathFile = "./res/RestaurantData.xlsx";
-    //     FileInputStream inputStream = new FileInputStream(excelPathFile);
-
-    //     XSSFWorkbook wb = new XSSFWorkbook(inputStream);
-    //     XSSFSheet sheet = wb.getSheet("Restaurant_List");
-    //     int rows = sheet.getLastRowNum();
-    //     int columns = sheet.getRow(1).getLastCellNum();
-    //     for (int i = 0; i < rows; i++) {
-    //         XSSFRow row = sheet.getRow(i);
-    //         for (int j = 0; j < columns; j++) {
-    //             XSSFCell cell = row.getCell(j);
-    //             switch(cell.getCellType()) {
-    //                 case STRING: 
-    //                 System.out.println(cell.getStringCellValue()); 
-    //                 System.out.println("==================================="); break;
-    //                 case NUMERIC: System.out.println(cell.getNumericCellValue()); 
-    //                 System.out.println("==================================="); break;         
-    //             }
-    //         }
-    //     }
-    //     wb.close();
-    // }
 
     /**
      * Returns the desired information for a given restaurant as a string. Cannot return hours
@@ -56,7 +32,6 @@ public class SpreadSheetReader {
         else cell = null;
         wb.close();
         return cell.getStringCellValue();
-        
     }
 
     /**
@@ -68,7 +43,6 @@ public class SpreadSheetReader {
         String excelPathFile = "./res/RestaurantData.xlsx";
         FileInputStream inputStream = new FileInputStream(excelPathFile);
         XSSFCell cell;
-
 
         XSSFWorkbook wb = new XSSFWorkbook(inputStream);
         XSSFSheet sheet = wb.getSheet("Restaurant_List");
@@ -82,15 +56,42 @@ public class SpreadSheetReader {
         return hours;
     }
 
+    /**
+     * Returns the latitude or longitude of the given zip code
+     * @param zipCode the input zip code
+     * @param latOrLong a string input to indicate the desired value. Either "latitude" or "longitude"
+     * @throws IOException 
+     */
+    public static double geoCode(double zipCode, String latOrLong) throws IOException {
+        String excelPathFile = "./res/TwinCitiesZipCodes.xlsx";
+        FileInputStream inputStream = new FileInputStream(excelPathFile);
+        double value = 0;
+
+        XSSFWorkbook wb = new XSSFWorkbook(inputStream);
+        XSSFSheet sheet = wb.getSheet("Zip_Codes");
+        for (int i = 1; i < 84; i++) {
+            Row row = sheet.getRow(i);
+            Cell cell = row.getCell(0);
+            if (cell.getNumericCellValue() == zipCode) {
+                if (latOrLong == "latitude") {
+                    cell = row.getCell(1);
+                    value = cell.getNumericCellValue();
+                }
+                else if (latOrLong == "longitude") {
+                    cell = row.getCell(2);
+                    value = cell.getNumericCellValue();
+                }
+                
+            }
+        }
+        wb.close();
+        return value;
+    }
+
     
-    // public static void main(String[] args) throws IOException {
-    //     SpreadSheetReader reader = new SpreadSheetReader();
-    //     // reader.printAll();
-    //     String info = reader.getInfo(30, "rating");
-    //     System.out.println(info);
-    //     // String[] hours = reader.getHours(1);
-    //     // for (String s : hours) {
-    //     //     System.out.println(s);
-    //     // }
-    // }
+    public static void main(String[] args) throws IOException {
+        double latitude = SpreadSheetReader.geoCode(55105, "latitude");
+        double longitude = SpreadSheetReader.geoCode(55105, "longitude");
+        System.out.println("Latitude: " + latitude + ". Longitude: " + longitude);
+    }
 }
