@@ -6,6 +6,7 @@ public class Restaurant {
     private String[] hours;
     private String description;
     private String location;
+    private String zipCode;
 
     /**
      * Class that contains restaurant attributes
@@ -16,8 +17,9 @@ public class Restaurant {
      * @param hours Array of seven Strings for daily hours, monday through sunday
      * @param description Short description of restaurant
      * @param location Address of restaurant
+     * @param zipCode zip code of address of restaurant
      */
-    public Restaurant(String name, String cuisine, double rating, String priceRange, String[] hours, String description, String location) {
+    public Restaurant(String name, String cuisine, double rating, String priceRange, String[] hours, String description, String location, String zipCode) {
         this.name = name;
         this.cuisine = cuisine;
         this.rating = rating;
@@ -25,6 +27,7 @@ public class Restaurant {
         this.hours = hours;
         this.description = description;
         this.location = location;
+        this.zipCode = zipCode;
     }
 
     public String getName() {
@@ -53,5 +56,9 @@ public class Restaurant {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getZipCode() {
+        return zipCode;
     }
 }
