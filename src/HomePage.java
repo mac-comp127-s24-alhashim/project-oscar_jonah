@@ -22,7 +22,7 @@ public class HomePage implements Page {
         this.canvas = canvas;
     }
 
-    public GraphicsGroup makePage() {
+    public GraphicsGroup makePage(InputManager inputManager) {
 
         GraphicsGroup page = new GraphicsGroup();
 

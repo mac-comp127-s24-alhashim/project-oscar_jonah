@@ -2,7 +2,7 @@ public class Restaurant {
     private String name;
     private String cuisine;
     private double rating;
-    private int price;
+    private String priceRange;
     private String[] hours;
     private String description;
     private String location;
@@ -12,16 +12,16 @@ public class Restaurant {
      * @param name
      * @param cuisine
      * @param rating 
-     * @param price Typical price of meal
+     * @param priceRange Typical price of meal
      * @param hours Array of seven Strings for daily hours, monday through sunday
      * @param description Short description of restaurant
      * @param location Address of restaurant
      */
-    public Restaurant(String name, String cuisine, double rating, int price, String[] hours, String description, String location) {
+    public Restaurant(String name, String cuisine, double rating, String priceRange, String[] hours, String description, String location) {
         this.name = name;
         this.cuisine = cuisine;
         this.rating = rating;
-        this.price = price;
+        this.priceRange = priceRange;
         this.hours = hours;
         this.description = description;
         this.location = location;
@@ -39,8 +39,8 @@ public class Restaurant {
         return rating;
     }
 
-    public int getPrice() {
-        return price;
+    public String getPriceRange() {
+        return priceRange;
     }
 
     public String[] getHours() {

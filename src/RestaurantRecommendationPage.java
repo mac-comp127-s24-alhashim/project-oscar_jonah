@@ -26,7 +26,7 @@ public class RestaurantRecommendationPage implements Page {
         this.canvas = canvas;
     }
     
-    public GraphicsGroup makePage() throws IOException {
+    public GraphicsGroup makePage(InputManager inputManager) throws IOException {
         
         int randomChoice = (int) ((Math.random() * (30 - 1)) + 1);
 

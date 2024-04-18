@@ -17,6 +17,8 @@ public class SpreadSheetReader {
      * @param rowNum the index of the restaurant as it appears in the xlsx file, from 1 to 30
      * @param type the type of information we want to get from the restaurant (name, cuisine, rating, range, address, or description)
      */
+
+     
     public static String getInfo(int rowNum, String type) throws IOException {
         String excelPathFile = "./res/RestaurantData.xlsx";
         FileInputStream inputStream = new FileInputStream(excelPathFile);
@@ -30,6 +32,7 @@ public class SpreadSheetReader {
         else if (type == "rating") cell = row.getCell(2);
         else if (type == "range") cell = row.getCell(10);
         else if (type == "address") cell = row.getCell(11);
+        //TODO: GET ZIP CODE
         else if (type == "description") cell = row.getCell(12);
         else cell = null;
         wb.close();

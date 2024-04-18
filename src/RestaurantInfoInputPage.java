@@ -15,6 +15,7 @@ public class RestaurantInfoInputPage implements Page {
     double canvasWidth;
     double canvasHeight;
     RestaurantVisualization canvas;
+    InputManager inputManager;
 
     /**
      * Page for user to input cuisine and budget
@@ -31,7 +32,8 @@ public class RestaurantInfoInputPage implements Page {
      * dropdown displayed when button clicked
      * q2 displayed after cuisine selected
      */
-    public GraphicsGroup makePage() {
+    public GraphicsGroup makePage(InputManager inputManager) {
+        this.inputManager = inputManager;
 
         GraphicsGroup page = new GraphicsGroup();
 
@@ -52,7 +54,7 @@ public class RestaurantInfoInputPage implements Page {
     }
 
     public void q2(GraphicsGroup page) {
-        GraphicsText budgetPrompt = new GraphicsText("Indicate your budget. \nIf you don't have a budget in mind, leave blank.");
+        GraphicsText budgetPrompt = new GraphicsText("Indicate your budget only numeric characters. \nIf you don't have a budget in mind, type 0.");
         budgetPrompt.setFontSize(18);
         budgetPrompt.setAlignment(TextAlignment.CENTER);
         budgetPrompt.setCenter(canvasWidth/2, canvasHeight*0.5);
@@ -66,7 +68,8 @@ public class RestaurantInfoInputPage implements Page {
         
         nextPage.onClick(() -> {
             try {
-                canvas.setPage(3);
+                inputManager.setBudget(Integer.parseInt(budgetInput.getText()));
+                canvas.setPage(2);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -91,7 +94,7 @@ public class RestaurantInfoInputPage implements Page {
             dropdown.add(newChoice);
             String cuisineName = cuisines[i];
             newChoice.onClick(() -> {
-                
+                inputManager.setCuisine(cuisineName);
                 GraphicsText cuisineSelection = new GraphicsText(cuisineName);
                 cuisineSelection.setCenter(mainButton.getCenter());
                 Rectangle border = new Rectangle(cuisineSelection.getX() - 7, cuisineSelection.getY() - 17, cuisineSelection.getWidth() + 14, cuisineSelection.getHeight() + 17);

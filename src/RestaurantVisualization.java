@@ -12,6 +12,7 @@ public class RestaurantVisualization extends CanvasWindow {
     double canvasWidth;
     double canvasHeight;
     private Page[] pages = new Page[4];
+    InputManager inputManager = new InputManager();
 
     /**
      * Class that extends GraphicsGroup and creates the different navigation pages
@@ -43,7 +44,7 @@ public class RestaurantVisualization extends CanvasWindow {
         if (page != 0) {
             addHomeButton();
         }
-        this.add(pages[page].makePage());
+        this.add(pages[page].makePage(inputManager));
     }
 
     /**
