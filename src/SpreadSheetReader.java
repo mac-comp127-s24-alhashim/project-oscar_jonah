@@ -15,7 +15,7 @@ public class SpreadSheetReader {
     /**
      * Returns the desired information for a given restaurant as a string. Cannot return hours
      * @param rowNum the index of the restaurant as it appears in the xlsx file, from 1 to 30
-     * @param type the type of information we want to get from the restaurant (name, cuisine, rating, range, address, or description)
+     * @param type the type of information we want to get from the restaurant (name, cuisine, rating, range, address, zip code, or description)
      */
 
      
@@ -32,8 +32,8 @@ public class SpreadSheetReader {
         else if (type == "rating") cell = row.getCell(2);
         else if (type == "range") cell = row.getCell(10);
         else if (type == "address") cell = row.getCell(11);
-        //TODO: GET ZIP CODE
-        else if (type == "description") cell = row.getCell(12);
+        else if (type == "zip code") cell = row.getCell(12);
+        else if (type == "description") cell = row.getCell(13);
         else cell = null;
         wb.close();
         return cell.getStringCellValue();
@@ -137,5 +137,6 @@ public class SpreadSheetReader {
         Point zipCodePoint = SpreadSheetReader.zipCodePoint(55105);
         System.out.println("Longitude: " + zipCodePoint.getX() + ". Latitude: " + zipCodePoint.getY());
         System.out.println(SpreadSheetReader.getNumberOfRestaurants());
+        System.out.println(SpreadSheetReader.getInfo(20, "zip code"));
     }
 }
