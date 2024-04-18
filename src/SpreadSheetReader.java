@@ -3,7 +3,9 @@ import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.*;;
+import org.apache.poi.xssf.usermodel.*;
+
+import edu.macalester.graphics.Point;;
 
 /**
  * Helper class to read data from a spreadsheet.
@@ -81,6 +83,10 @@ public class SpreadSheetReader {
                     cell = row.getCell(2);
                     value = cell.getNumericCellValue();
                 }
+                //TODO: Implement this in the frontend
+                else {
+                    System.out.println("Please enter a valid zip code");
+                }
                 
             }
         }
@@ -88,10 +94,45 @@ public class SpreadSheetReader {
         return value;
     }
 
+    /**
+     * Returns a point with the zip code values of (longitude, latitude)
+     * @param zipCode the input zip code
+     * @throws IOException 
+     */
+    public static Point zipCodePoint(double zipCode) throws IOException {
+        double latitude = SpreadSheetReader.geoCode(zipCode, "latitude");
+        double longitude = SpreadSheetReader.geoCode(zipCode, "longitude");
+        return new Point(longitude, latitude);
+    }
+
+    /**
+     * Returns the total number of restaurants in the spreadsheet
+     * @throws IOException 
+     */
+    public static int getNumberOfRestaurants() throws IOException {
+        String excelPathFile = "./res/RestaurantData.xlsx";
+        FileInputStream inputStream = new FileInputStream(excelPathFile);
+
+        XSSFWorkbook wb = new XSSFWorkbook(inputStream);
+        XSSFSheet sheet = wb.getSheet("Restaurant_List");
+
+        int count = 0;
+        
+        for (Row row : sheet) {
+            Cell cell = row.getCell(0, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+            String restaurantName = cell.getStringCellValue().trim();
+            if (!restaurantName.isEmpty()) {
+                count++;
+            }
+        }
+
+        wb.close();
+        return count - 1;
+    }
     
     public static void main(String[] args) throws IOException {
-        double latitude = SpreadSheetReader.geoCode(55105, "latitude");
-        double longitude = SpreadSheetReader.geoCode(55105, "longitude");
-        System.out.println("Latitude: " + latitude + ". Longitude: " + longitude);
+        Point zipCodePoint = SpreadSheetReader.zipCodePoint(55105);
+        System.out.println("Longitude: " + zipCodePoint.getX() + ". Latitude: " + zipCodePoint.getY());
+        System.out.println(SpreadSheetReader.getNumberOfRestaurants());
     }
 }
