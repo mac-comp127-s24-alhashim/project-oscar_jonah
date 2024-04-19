@@ -3,8 +3,16 @@ import java.io.IOException;
 import edu.macalester.graphics.Point;
 
 public class DistanceCalculator {
-    public static double getDistance(Point zipCodeOne, Point zipCodeTwo) {
-        double distance =  Math.sqrt(Math.pow((zipCodeOne.getX() - zipCodeTwo.getX()), 2) + Math.pow((zipCodeOne.getY() - zipCodeTwo.getY()), 2));      
+    public static double getDistance(double zipCodeOne, double zipCodeTwo) throws IOException {
+        Point zipCodeOnePoint = new Point(SpreadSheetReader.geoCode(zipCodeOne, "latitude"), SpreadSheetReader.geoCode(zipCodeOne, "longitutde"));
+        Point zipCodeTwoPoint = new Point(SpreadSheetReader.geoCode(zipCodeTwo, "latitude"), SpreadSheetReader.geoCode(zipCodeTwo, "longitutde"));
+
+
+        double distance =  Math.sqrt(Math.pow((zipCodeOnePoint.getX() - zipCodeTwoPoint.getX()), 2) + Math.pow((zipCodeOnePoint.getY() - zipCodeTwoPoint.getY()), 2));      
         return distance;
     }
+}
+
+public static void main(String args[]) throws IOException {
+    System.out.println(DistanceCalculator.getDistance(55105, 55104));
 }

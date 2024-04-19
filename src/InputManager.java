@@ -27,7 +27,6 @@ public class InputManager {
 
     public List<Restaurant> getRestaurantList() throws IOException {
         ArrayList<Restaurant> relevantRestaurants = new ArrayList<Restaurant>();
-        Point location = SpreadSheetReader.zipCodePoint(this.startLocation);
 
         int numOfRestaurants = SpreadSheetReader.getNumberOfRestaurants();
 
@@ -36,7 +35,7 @@ public class InputManager {
                 if (this.budget == 0) {
                     relevantRestaurants.add(makeRestaurantFromRowNumber(i));
                 }
-                else if (Integer.parseInt((SpreadSheetReader.getInfo(i,"range").substring(1))) < this.budget) {
+                else if (Integer.parseInt((SpreadSheetReader.getInfo(i,"range").substring(0,1))) < this.budget) {
                     relevantRestaurants.add(makeRestaurantFromRowNumber(i));
                 }
             }
@@ -45,39 +44,18 @@ public class InputManager {
         // sorts list according to distance from start point
         List<Restaurant> orderedList = relevantRestaurants.stream()
             .sorted((i1,i2) -> {
-                double i1ZipLat = 0;
+                Double distance1 = 0.0;
                 try {
-                    i1ZipLat = SpreadSheetReader.geoCode(Double.parseDouble(i1.getZipCode()), "latitude");
+                    distance1 = DistanceCalculator.getDistance(Double.parseDouble(i1.getZipCode()), this.startLocation);
                 } catch (NumberFormatException | IOException e) {
                     e.printStackTrace();
                 }
-                double i1ZipLong = 0;
+                Double distance2 = 0.0;
                 try {
-                    i1ZipLong = SpreadSheetReader.geoCode(Double.parseDouble(i1.getZipCode()), "longitude");
+                    distance2 = DistanceCalculator.getDistance(Double.parseDouble(i2.getZipCode()), this.startLocation);
                 } catch (NumberFormatException | IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                Point i1ZipPoint = new Point (i1ZipLat, i1ZipLong);
-                Double distance1 = DistanceCalculator.getDistance(i1ZipPoint, location);
-                
-                double i2ZipLat = 0;
-                try {
-                    i2ZipLat = SpreadSheetReader.geoCode(Double.parseDouble(i2.getZipCode()), "latitude");
-                } catch (NumberFormatException | IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                double i2ZipLong = 0;
-                try {
-                    i2ZipLong = SpreadSheetReader.geoCode(Double.parseDouble(i2.getZipCode()), "longitude");
-                } catch (NumberFormatException | IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                Point i2ZipPoint = new Point (i2ZipLat, i2ZipLong);
-                Double distance2 = DistanceCalculator.getDistance(i2ZipPoint, location);
-
                 return distance1.compareTo(distance2);
             }).toList();
 
