@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import edu.macalester.graphics.Point;
 
@@ -35,32 +36,33 @@ public class InputManager {
                 if (this.budget == 0) {
                     relevantRestaurants.add(makeRestaurantFromRowNumber(i));
                 }
-                else if (Integer.parseInt((SpreadSheetReader.getInfo(i,"range").substring(0,1))) < this.budget) {
+                else if (Integer.parseInt((SpreadSheetReader.getInfo(i,"range").substring(0,2))) < this.budget) {
                     relevantRestaurants.add(makeRestaurantFromRowNumber(i));
                 }
             }
-        }
+        } 
 
         // sorts list according to distance from start point
-        List<Restaurant> orderedList = relevantRestaurants.stream()
-            .sorted((i1,i2) -> {
-                Double distance1 = 0.0;
-                try {
-                    distance1 = DistanceCalculator.getDistance(Double.parseDouble(i1.getZipCode()), this.startLocation);
-                } catch (NumberFormatException | IOException e) {
-                    e.printStackTrace();
-                }
-                Double distance2 = 0.0;
-                try {
-                    distance2 = DistanceCalculator.getDistance(Double.parseDouble(i2.getZipCode()), this.startLocation);
-                } catch (NumberFormatException | IOException e) {
-                    e.printStackTrace();
-                }
-                return distance1.compareTo(distance2);
-            }).toList();
-
+            List<Restaurant> orderedList = relevantRestaurants.stream() 
+                    .sorted((i1,i2) -> {
+                        Double distance1 = 0.0;
+                        try {
+                            distance1 = DistanceCalculator.getDistance(Double.parseDouble(i1.getZipCode()), this.startLocation);
+                        } catch (NumberFormatException | IOException e) {
+                            e.printStackTrace();
+                        }
+                        Double distance2 = 0.0;
+                        try {
+                            distance2 = DistanceCalculator.getDistance(Double.parseDouble(i2.getZipCode()), this.startLocation);
+                        } catch (NumberFormatException | IOException e) {
+                            e.printStackTrace();
+                        }
+                        return distance1.compareTo(distance2);
+                    })
+                    .collect(Collectors.toList());
+        
             return orderedList;
-        }
+                }
 
     private Restaurant makeRestaurantFromRowNumber(int i) {
         String name="";
@@ -116,9 +118,11 @@ public class InputManager {
     }
     public static void main(String args[]) throws IOException {
         InputManager im = new InputManager();
-        im.setBudget(40);
+        im.setBudget(15);
         im.setCuisine("American");
         im.setLocation("55105");
         System.out.println(im.getRestaurantList());
+
+        // System.out.println(DistanceCalculator.getDistance(55105, 55104));
     }
 }

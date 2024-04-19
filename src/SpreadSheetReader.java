@@ -86,10 +86,6 @@ public class SpreadSheetReader {
                     cell = row.getCell(2);
                     value = cell.getNumericCellValue();
                 }
-                //TODO: Implement this in the frontend
-                else {
-                    System.out.println("Please enter a valid zip code");
-                }
                 
             }
         }

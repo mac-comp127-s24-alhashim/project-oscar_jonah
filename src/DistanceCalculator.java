@@ -12,7 +12,3 @@ public class DistanceCalculator {
         return distance;
     }
 }
-
-public static void main(String args[]) throws IOException {
-    System.out.println(DistanceCalculator.getDistance(55105, 55104));
-}
