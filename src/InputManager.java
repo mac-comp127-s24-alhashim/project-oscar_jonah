@@ -121,7 +121,10 @@ public class InputManager {
         im.setBudget(15);
         im.setCuisine("American");
         im.setLocation("55105");
-        System.out.println(im.getRestaurantList());
+        List<Restaurant> restaurants = im.getRestaurantList();
+        for (Restaurant r : restaurants) {
+            System.out.println(r.getName() + " " + r.getCuisine() + " " + r.getPriceRange());
+        }
 
         // System.out.println(DistanceCalculator.getDistance(55105, 55104));
     }
