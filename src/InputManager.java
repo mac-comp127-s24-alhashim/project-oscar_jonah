@@ -67,25 +67,25 @@ public class InputManager {
     private Restaurant makeRestaurantFromRowNumber(int i) {
         String name="";
             try {
-                name = SpreadSheetReader.getInfo(i+1, "name");
+                name = SpreadSheetReader.getInfo(i, "name");
             } catch (IOException e) {
                 e.printStackTrace();
             }
             String cuisine="";
             try {
-                cuisine = SpreadSheetReader.getInfo(i+1, "cuisine");
+                cuisine = SpreadSheetReader.getInfo(i, "cuisine");
             } catch (IOException e) {
                 e.printStackTrace();
             }
             double rating=-1;
             try {
-                rating = Double.parseDouble(SpreadSheetReader.getInfo(i+1, "rating"));
+                rating = Double.parseDouble(SpreadSheetReader.getInfo(i, "rating"));
             } catch (NumberFormatException | IOException e) {
                 e.printStackTrace();
             }
             String priceRange="";
             try {
-                priceRange = SpreadSheetReader.getInfo(i+1, "range");
+                priceRange = SpreadSheetReader.getInfo(i, "range");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -97,19 +97,19 @@ public class InputManager {
             }
             String description="";
             try {
-                description = SpreadSheetReader.getInfo(i+1, "description");
+                description = SpreadSheetReader.getInfo(i, "description");
             } catch (IOException e) {
                 e.printStackTrace();
             }
             String[] hours = new String[7];
             try {
-                hours = SpreadSheetReader.getHours(i+1);
+                hours = SpreadSheetReader.getHours(i);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             String zipCode = "";
             try {
-                zipCode = SpreadSheetReader.getInfo(i+1, "zip code");
+                zipCode = SpreadSheetReader.getInfo(i, "zip code");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -118,10 +118,11 @@ public class InputManager {
     }
     public static void main(String args[]) throws IOException {
         InputManager im = new InputManager();
-        im.setBudget(15);
+        im.setBudget(80);
         im.setCuisine("American");
         im.setLocation("55105");
         List<Restaurant> restaurants = im.getRestaurantList();
+        System.out.println(restaurants.size());
         for (Restaurant r : restaurants) {
             System.out.println(r.getName() + " " + r.getCuisine() + " " + r.getPriceRange());
         }
