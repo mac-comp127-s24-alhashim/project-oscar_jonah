@@ -1,6 +1,6 @@
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
@@ -9,8 +9,7 @@ import edu.macalester.graphics.TextAlignment;
 /**
  * Final page that displays information about restaurant recommendation
  */
-
-public class RestaurantRecommendationPage implements Page {
+public class RandomRestaurantRecPage implements Page {
     double canvasWidth;
     double canvasHeight;
     RestaurantVisualization canvas;
@@ -21,36 +20,36 @@ public class RestaurantRecommendationPage implements Page {
      * Final page that displays information about restaurant recommendation
      * @param canvas extension of CanvasWindow, used to get dimensions
      */
-    public RestaurantRecommendationPage(RestaurantVisualization canvas) {
+    public RandomRestaurantRecPage(RestaurantVisualization canvas) {
         this.canvasWidth = canvas.getWidth();
         this.canvasHeight = canvas.getHeight();
         this.canvas = canvas;
     }
     
     public GraphicsGroup makePage(InputManager inputManager) throws IOException {
-
-        List<Restaurant> restList = inputManager.getRestaurantList();
         
-        Restaurant restaurantChoice = restList.get(0);
+        
+
+        int randomChoice = (int) ((Math.random() * (30 - 1)) + 1);
 
         GraphicsGroup page = new GraphicsGroup();
 
-        GraphicsText name = new GraphicsText(restaurantChoice.getName());
+        GraphicsText name = new GraphicsText(SpreadSheetReader.getInfo(randomChoice, "name"));
         name.setCenter(canvasWidth/2, canvasHeight*0.2);
         page.add(name);
 
-        GraphicsText rating = new GraphicsText("Yelp Rating: " + restaurantChoice.getRating());
+        GraphicsText rating = new GraphicsText("Yelp Rating: " + SpreadSheetReader.getInfo(randomChoice, "rating"));
         rating.setCenter(canvasWidth/2, canvasHeight*0.3);
         page.add(rating);
 
-        String descriptionRaw = restaurantChoice.getDescription();
+        String descriptionRaw = SpreadSheetReader.getInfo(randomChoice, "description");
         
         GraphicsText description = new GraphicsText(formatDescription(descriptionRaw));
         description.setAlignment(TextAlignment.CENTER); 
         description.setCenter(canvasWidth/2, canvasHeight*0.4);
         page.add(description);
 
-        String[] openHours = restaurantChoice.getHours();
+        String[] openHours = SpreadSheetReader.getHours(randomChoice);
         GraphicsText mondayHours = new GraphicsText("Monday: " + openHours[0]);
         mondayHours.setCenter(canvasWidth/2, canvasHeight*0.6);
         page.add(mondayHours);
@@ -73,7 +72,7 @@ public class RestaurantRecommendationPage implements Page {
         sundayHours.setCenter(canvasWidth/2, canvasHeight*0.6 + 120);
         page.add(sundayHours);
 
-        GraphicsText address = new GraphicsText(restaurantChoice.getLocation());
+        GraphicsText address = new GraphicsText(SpreadSheetReader.getInfo(randomChoice, "address"));
         address.setCenter(canvasWidth/2, canvasHeight*0.95);
         page.add(address);
 

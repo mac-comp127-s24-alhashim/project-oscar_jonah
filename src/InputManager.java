@@ -37,10 +37,10 @@ public class InputManager {
         for (int i=1; i<=numOfRestaurants; i++) {
             if ((SpreadSheetReader.getInfo(i,"cuisine").equals(this.cuisine)) || (this.cuisine.equals(""))) {
                 if (this.budget == 0) {
-                    relevantRestaurants.add(makeRestaurantFromRowNumber(i));
+                    relevantRestaurants.add(SpreadSheetReader.makeRestaurantFromRowNumber(i));
                 }
                 else if (Integer.parseInt((SpreadSheetReader.getInfo(i,"range").substring(0,2))) < this.budget) {
-                    relevantRestaurants.add(makeRestaurantFromRowNumber(i));
+                    relevantRestaurants.add(SpreadSheetReader.makeRestaurantFromRowNumber(i));
                 }
             }
         } 
@@ -67,63 +67,11 @@ public class InputManager {
             return orderedList;
                 }
 
-    private Restaurant makeRestaurantFromRowNumber(int i) {
-        String name="";
-            try {
-                name = SpreadSheetReader.getInfo(i, "name");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String cuisine="";
-            try {
-                cuisine = SpreadSheetReader.getInfo(i, "cuisine");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            double rating=-1;
-            try {
-                rating = Double.parseDouble(SpreadSheetReader.getInfo(i, "rating"));
-            } catch (NumberFormatException | IOException e) {
-                e.printStackTrace();
-            }
-            String priceRange="";
-            try {
-                priceRange = SpreadSheetReader.getInfo(i, "range");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String location="";
-            try {
-                location = SpreadSheetReader.getInfo(i+1, "address");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String description="";
-            try {
-                description = SpreadSheetReader.getInfo(i, "description");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String[] hours = new String[7];
-            try {
-                hours = SpreadSheetReader.getHours(i);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String zipCode = "";
-            try {
-                zipCode = SpreadSheetReader.getInfo(i, "zip code");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return new Restaurant(name, cuisine, rating, priceRange, hours, description, location, zipCode);
-    }
     public static void main(String args[]) throws IOException {
         InputManager im = new InputManager();
-        im.setBudget(80);
+        im.setBudget(15);
         im.setCuisine("American");
-        im.setLocation("55105");
+        im.setLocation("55104");
         List<Restaurant> restaurants = im.getRestaurantList();
         System.out.println(restaurants.size());
         for (Restaurant r : restaurants) {

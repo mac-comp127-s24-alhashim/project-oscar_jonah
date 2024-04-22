@@ -11,7 +11,7 @@ import java.io.IOException;
 public class RestaurantVisualization extends CanvasWindow {
     double canvasWidth;
     double canvasHeight;
-    private Page[] pages = new Page[4];
+    private Page[] pages = new Page[5];
     InputManager inputManager = new InputManager();
 
     /**
@@ -29,7 +29,8 @@ public class RestaurantVisualization extends CanvasWindow {
         pages[0] = new HomePage(this);
         pages[1] = new RestaurantInfoInputPage(this);
         pages[2] = new LocationInputPage(this);
-        pages[3] = new RestaurantRecommendationPage(this);
+        pages[3] = new RandomRestaurantRecPage(this);
+        pages[4] = new RestaurantRecommendationPage(this);
 
         setPage(0);
     }

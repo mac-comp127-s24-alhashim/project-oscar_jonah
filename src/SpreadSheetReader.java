@@ -128,11 +128,64 @@ public class SpreadSheetReader {
         wb.close();
         return count - 1;
     }
+
+    public static Restaurant makeRestaurantFromRowNumber(int i) {
+        String name="";
+            try {
+                name = SpreadSheetReader.getInfo(i, "name");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String cuisine="";
+            try {
+                cuisine = SpreadSheetReader.getInfo(i, "cuisine");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            double rating=-1;
+            try {
+                rating = Double.parseDouble(SpreadSheetReader.getInfo(i, "rating"));
+            } catch (NumberFormatException | IOException e) {
+                e.printStackTrace();
+            }
+            String priceRange="";
+            try {
+                priceRange = SpreadSheetReader.getInfo(i, "range");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String location="";
+            try {
+                location = SpreadSheetReader.getInfo(i, "address");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String description="";
+            try {
+                description = SpreadSheetReader.getInfo(i, "description");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String[] hours = new String[7];
+            try {
+                hours = SpreadSheetReader.getHours(i);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String zipCode = "";
+            try {
+                zipCode = SpreadSheetReader.getInfo(i, "zip code");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return new Restaurant(name, cuisine, rating, priceRange, hours, description, location, zipCode);
+    }
     
     public static void main(String[] args) throws IOException {
-        Point zipCodePoint = SpreadSheetReader.zipCodePoint(55105);
-        System.out.println("Longitude: " + zipCodePoint.getX() + ". Latitude: " + zipCodePoint.getY());
-        System.out.println(SpreadSheetReader.getNumberOfRestaurants());
-        System.out.println(SpreadSheetReader.getInfo(20, "zip code"));
+        // Point zipCodePoint = SpreadSheetReader.zipCodePoint(55105);
+        // System.out.println("Longitude: " + zipCodePoint.getX() + ". Latitude: " + zipCodePoint.getY());
+        // System.out.println(SpreadSheetReader.getNumberOfRestaurants());
+        System.out.println(SpreadSheetReader.makeRestaurantFromRowNumber(1).getName());
     }
 }
