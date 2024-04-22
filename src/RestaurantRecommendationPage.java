@@ -15,7 +15,7 @@ public class RestaurantRecommendationPage implements Page {
     double canvasWidth;
     double canvasHeight;
     RestaurantVisualization canvas;
-    int currentRest = 0;
+    static int currentRest = 0;
     List<Restaurant> restList = List.of();
 
     Restaurant restaurant;
@@ -38,13 +38,12 @@ public class RestaurantRecommendationPage implements Page {
             restList = inputManager.getRestaurantList();
         }
 
-        
-
         return updatePage(restList, inputManager);
         
-        
+    }
 
-        
+    public static void resetPage() {
+        currentRest = 0;
     }
 
     private GraphicsGroup updatePage(List<Restaurant> restList, InputManager inputManager) {
@@ -61,7 +60,7 @@ public class RestaurantRecommendationPage implements Page {
                 currentRest += 1;
             }
             try {
-                makePage(inputManager);
+                RestaurantFinder.getCanvas().setPage(4);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -78,9 +77,8 @@ public class RestaurantRecommendationPage implements Page {
                 currentRest -= 1;
             }
             try {
-                makePage(inputManager);
+                RestaurantFinder.getCanvas().setPage(4);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
