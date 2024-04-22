@@ -130,6 +130,7 @@ public class SpreadSheetReader {
     }
 
     public static Restaurant makeRestaurantFromRowNumber(int i) {
+
         String name="";
             try {
                 name = SpreadSheetReader.getInfo(i, "name");

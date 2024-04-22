@@ -5,6 +5,7 @@ import java.util.List;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.TextAlignment;
+import edu.macalester.graphics.ui.Button;
 
 /**
  * Final page that displays information about restaurant recommendation
@@ -14,8 +15,11 @@ public class RestaurantRecommendationPage implements Page {
     double canvasWidth;
     double canvasHeight;
     RestaurantVisualization canvas;
+    int currentRest = 0;
+    List<Restaurant> restList = List.of();
 
     Restaurant restaurant;
+
 
     /**
      * Final page that displays information about restaurant recommendation
@@ -25,15 +29,61 @@ public class RestaurantRecommendationPage implements Page {
         this.canvasWidth = canvas.getWidth();
         this.canvasHeight = canvas.getHeight();
         this.canvas = canvas;
+
     }
     
     public GraphicsGroup makePage(InputManager inputManager) throws IOException {
 
-        List<Restaurant> restList = inputManager.getRestaurantList();
+        if (this.restList.isEmpty() ) {
+            restList = inputManager.getRestaurantList();
+        }
+
         
-        Restaurant restaurantChoice = restList.get(0);
+
+        return updatePage(restList, inputManager);
+        
+        
+
+        
+    }
+
+    private GraphicsGroup updatePage(List<Restaurant> restList, InputManager inputManager) {
+        Restaurant restaurantChoice = restList.get(currentRest);
 
         GraphicsGroup page = new GraphicsGroup();
+
+        Button nextPage = ButtonHelper.createButton(page, ">", canvas.getWidth()-20, canvas.getHeight()/2);
+        nextPage.onClick(() -> {
+            if (currentRest == restList.size()-1) {
+                currentRest = 0;
+            }
+            else {
+                currentRest += 1;
+            }
+            try {
+                makePage(inputManager);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+
+        Button prevPage = ButtonHelper.createButton(page, "<", 20, canvas.getHeight()/2);
+
+        prevPage.onClick(() -> {
+            if (currentRest == 0) {
+                currentRest = restList.size();
+            }
+            else {
+                currentRest -= 1;
+            }
+            try {
+                makePage(inputManager);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
 
         GraphicsText name = new GraphicsText(restaurantChoice.getName());
         name.setCenter(canvasWidth/2, canvasHeight*0.2);
