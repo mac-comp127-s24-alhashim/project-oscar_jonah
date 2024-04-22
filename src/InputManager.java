@@ -16,14 +16,17 @@ public class InputManager {
 
     public void setCuisine(String cuisine) {
         this.cuisine = cuisine;
+        System.out.println("Cuisine: " + this.cuisine);
     }
 
     public void setBudget(int budget) {
         this.budget = budget;
+        System.out.println("Budget: " + this.budget);
     }
 
     public void setLocation(String startLocation) {
         this.startLocation = Double.parseDouble(startLocation);
+        System.out.println("Location: " + this.startLocation);
     }
 
     public List<Restaurant> getRestaurantList() throws IOException {

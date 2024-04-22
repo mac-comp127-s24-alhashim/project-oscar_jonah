@@ -41,6 +41,7 @@ public class LocationInputPage implements Page {
 
         nextPage.onClick(() -> {
             try {
+                inputManager.setLocation(locationInput.getText());
                 canvas.setPage(3);
             } catch (IOException e) {
                 e.printStackTrace();
