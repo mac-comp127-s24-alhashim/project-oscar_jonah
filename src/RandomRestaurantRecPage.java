@@ -1,7 +1,6 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;

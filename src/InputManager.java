@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import edu.macalester.graphics.Point;
-
 public class InputManager {
     private String cuisine;
     private int budget;
@@ -46,26 +44,26 @@ public class InputManager {
         } 
 
         // sorts list according to distance from start point
-            List<Restaurant> orderedList = relevantRestaurants.stream() 
-                    .sorted((i1,i2) -> {
-                        Double distance1 = 0.0;
-                        try {
-                            distance1 = DistanceCalculator.getDistance(Double.parseDouble(i1.getZipCode()), this.startLocation);
-                        } catch (NumberFormatException | IOException e) {
-                            e.printStackTrace();
-                        }
-                        Double distance2 = 0.0;
-                        try {
-                            distance2 = DistanceCalculator.getDistance(Double.parseDouble(i2.getZipCode()), this.startLocation);
-                        } catch (NumberFormatException | IOException e) {
-                            e.printStackTrace();
-                        }
-                        return distance1.compareTo(distance2);
-                    })
-                    .collect(Collectors.toList());
-        
-            return orderedList;
-                }
+        List<Restaurant> orderedList = relevantRestaurants.stream() 
+                .sorted((i1,i2) -> {
+                    Double distance1 = 0.0;
+                    try {
+                        distance1 = DistanceCalculator.getDistance(Double.parseDouble(i1.getZipCode()), this.startLocation);
+                    } catch (NumberFormatException | IOException e) {
+                        e.printStackTrace();
+                    }
+                    Double distance2 = 0.0;
+                    try {
+                        distance2 = DistanceCalculator.getDistance(Double.parseDouble(i2.getZipCode()), this.startLocation);
+                    } catch (NumberFormatException | IOException e) {
+                        e.printStackTrace();
+                    }
+                    return distance1.compareTo(distance2);
+                })
+                .collect(Collectors.toList());
+    
+        return orderedList;
+    }
 
     public static void main(String args[]) throws IOException {
         InputManager im = new InputManager();
