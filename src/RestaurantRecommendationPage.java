@@ -35,7 +35,7 @@ public class RestaurantRecommendationPage implements Page {
     public GraphicsGroup makePage(InputManager inputManager) throws IOException {
 
         if (this.restList.isEmpty() ) {
-            restList = inputManager.getRestaurantList();
+            restList = inputManager.getOrderedRestaurantList();
         }
 
         return updatePage(restList, inputManager);
