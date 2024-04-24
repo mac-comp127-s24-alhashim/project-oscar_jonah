@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
@@ -27,22 +28,21 @@ public class RandomRestaurantRecPage implements Page {
     }
     
     public GraphicsGroup makePage(InputManager inputManager) throws IOException {
-        
-        
 
         int randomChoice = (int) ((Math.random() * (30 - 1)) + 1);
+        Restaurant res = inputManager.getRestaurantList().get(randomChoice);
 
         GraphicsGroup page = new GraphicsGroup();
 
-        GraphicsText name = new GraphicsText(SpreadSheetReader.getInfo(randomChoice, "name"));
+        GraphicsText name = new GraphicsText(res.getName());
         name.setCenter(canvasWidth/2, canvasHeight*0.2);
         page.add(name);
 
-        GraphicsText rating = new GraphicsText("Yelp Rating: " + SpreadSheetReader.getInfo(randomChoice, "rating"));
+        GraphicsText rating = new GraphicsText("Yelp Rating: " + res.getRating());
         rating.setCenter(canvasWidth/2, canvasHeight*0.3);
         page.add(rating);
 
-        String descriptionRaw = SpreadSheetReader.getInfo(randomChoice, "description");
+        String descriptionRaw = res.getDescription();
         
         GraphicsText description = new GraphicsText(formatDescription(descriptionRaw));
         description.setAlignment(TextAlignment.CENTER); 
@@ -72,7 +72,7 @@ public class RandomRestaurantRecPage implements Page {
         sundayHours.setCenter(canvasWidth/2, canvasHeight*0.6 + 120);
         page.add(sundayHours);
 
-        GraphicsText address = new GraphicsText(SpreadSheetReader.getInfo(randomChoice, "address"));
+        GraphicsText address = new GraphicsText(res.getLocation());
         address.setCenter(canvasWidth/2, canvasHeight*0.95);
         page.add(address);
 

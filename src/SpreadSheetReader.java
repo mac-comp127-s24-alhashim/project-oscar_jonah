@@ -1,5 +1,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,7 +21,8 @@ public class SpreadSheetReader {
      */
 
      
-    public static String getInfo(int rowNum, String type) throws IOException {
+    public static List<String> getInfo(int rowNum) throws IOException {
+        List<String> information = new ArrayList<>();
         String excelPathFile = "./res/RestaurantData.xlsx";
         FileInputStream inputStream = new FileInputStream(excelPathFile);
         XSSFCell cell;
@@ -27,16 +30,13 @@ public class SpreadSheetReader {
         XSSFWorkbook wb = new XSSFWorkbook(inputStream);
         XSSFSheet sheet = wb.getSheet("Restaurant_List");
         XSSFRow row = sheet.getRow(rowNum);
-        if (type == "name") cell = row.getCell(0);
-        else if (type == "cuisine") cell = row.getCell(1);
-        else if (type == "rating") cell = row.getCell(2);
-        else if (type == "range") cell = row.getCell(10);
-        else if (type == "address") cell = row.getCell(11);
-        else if (type == "zip code") cell = row.getCell(12);
-        else if (type == "description") cell = row.getCell(13);
-        else cell = null;
+
+        for (int i = 0; i < 14; i++) {
+            cell = row.getCell(i);
+            information.add(cell.getStringCellValue());
+        }
         wb.close();
-        return cell.getStringCellValue();
+        return information;
     }
 
     /**
@@ -129,58 +129,19 @@ public class SpreadSheetReader {
         return count - 1;
     }
 
-    public static Restaurant makeRestaurantFromRowNumber(int i) {
+    public static Restaurant makeRestaurantFromRowNumber(int i) throws IOException {
+        List<String> restInfo = getInfo(i);
+        String name = restInfo.get(0);
+        String cuisine = restInfo.get(1);
+        double rating= Double.parseDouble(restInfo.get(2));
+        String priceRange = restInfo.get(10);
+        String location= restInfo.get(11);
+        String description = restInfo.get(13);
+        String[] hours = new String[7];
+        hours = SpreadSheetReader.getHours(i);
+        String zipCode = restInfo.get(12);
 
-        String name="";
-            try {
-                name = SpreadSheetReader.getInfo(i, "name");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String cuisine="";
-            try {
-                cuisine = SpreadSheetReader.getInfo(i, "cuisine");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            double rating=-1;
-            try {
-                rating = Double.parseDouble(SpreadSheetReader.getInfo(i, "rating"));
-            } catch (NumberFormatException | IOException e) {
-                e.printStackTrace();
-            }
-            String priceRange="";
-            try {
-                priceRange = SpreadSheetReader.getInfo(i, "range");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String location="";
-            try {
-                location = SpreadSheetReader.getInfo(i, "address");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String description="";
-            try {
-                description = SpreadSheetReader.getInfo(i, "description");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String[] hours = new String[7];
-            try {
-                hours = SpreadSheetReader.getHours(i);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String zipCode = "";
-            try {
-                zipCode = SpreadSheetReader.getInfo(i, "zip code");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return new Restaurant(name, cuisine, rating, priceRange, hours, description, location, zipCode);
+        return new Restaurant(name, cuisine, rating, priceRange, hours, description, location, zipCode);
     }
     
     public static void main(String[] args) throws IOException {

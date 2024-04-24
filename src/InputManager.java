@@ -35,11 +35,11 @@ public class InputManager {
         int numOfRestaurants = SpreadSheetReader.getNumberOfRestaurants();
 
         for (int i=1; i<=numOfRestaurants; i++) {
-            if ((SpreadSheetReader.getInfo(i,"cuisine").equals(this.cuisine)) || (this.cuisine.equals(""))) {
+            if ((SpreadSheetReader.getInfo(i).get(1).equals(this.cuisine)) || (this.cuisine == null)) {
                 if (this.budget == 0) {
                     relevantRestaurants.add(SpreadSheetReader.makeRestaurantFromRowNumber(i));
                 }
-                else if (Integer.parseInt((SpreadSheetReader.getInfo(i,"range").substring(0,2))) < this.budget) {
+                else if (Integer.parseInt((SpreadSheetReader.getInfo(i).get(10).substring(0,2))) < this.budget) {
                     relevantRestaurants.add(SpreadSheetReader.makeRestaurantFromRowNumber(i));
                 }
             }
