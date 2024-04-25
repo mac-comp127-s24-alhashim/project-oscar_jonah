@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.ui.Button;
@@ -36,6 +37,9 @@ public class RestaurantInfoInputPage implements Page {
         this.inputManager = inputManager;
 
         GraphicsGroup page = new GraphicsGroup();
+
+        Image background = new Image("blank_options.jpg");
+        page.add(background);
 
         q1(page);
         

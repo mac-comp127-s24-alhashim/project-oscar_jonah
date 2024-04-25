@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.ui.Button;
 
@@ -50,6 +51,9 @@ public class RestaurantRecommendationPage implements Page {
         Restaurant restaurantChoice = restList.get(currentRest);
 
         GraphicsGroup page = new GraphicsGroup();
+
+        Image background = new Image("final_recommendation.jpg");
+        page.add(background);
 
         Button nextPage = ButtonHelper.createButton(page, ">", canvas.getWidth()-30, canvas.getHeight()/2);
         nextPage.onClick(() -> {

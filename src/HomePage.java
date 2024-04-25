@@ -2,6 +2,7 @@ import java.io.IOException;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.ui.Button;
 
 /**
@@ -26,15 +27,10 @@ public class HomePage implements Page {
 
         GraphicsGroup page = new GraphicsGroup();
 
-        GraphicsText title = new GraphicsText("Where to eat?");
-        title.setFontSize(35);
-        title.setCenter(canvasWidth/2, canvasHeight*0.2);
-        page.add(title);
-        GraphicsText location = new GraphicsText("Twin Cities");
-        location.setCenter(canvasWidth/2, canvasHeight*0.3);
-        page.add(title);
+        Image background = new Image("start_page.jpg");
+        page.add(background);
+
         Button start = ButtonHelper.createButton(page, "Start", canvasWidth/2, canvasHeight*0.5);
-        
 
         Button randomChoice = ButtonHelper.createButton(page, "Give me a random restaurant", canvasWidth/2, canvasHeight*0.7); 
 

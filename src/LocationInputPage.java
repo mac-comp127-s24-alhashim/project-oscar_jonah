@@ -2,6 +2,7 @@ import java.io.IOException;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 
@@ -28,6 +29,9 @@ public class LocationInputPage implements Page {
     public GraphicsGroup makePage(InputManager inputManager) {
 
         GraphicsGroup page = new GraphicsGroup();
+
+        Image background = new Image("blank_options.jpg");
+        page.add(background);
 
         GraphicsText locationPrompt = new GraphicsText("Where are you looking to eat?");
         locationPrompt.setCenter(canvasWidth/2, canvasHeight*0.35);

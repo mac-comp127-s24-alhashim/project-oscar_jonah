@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.TextAlignment;
 
 /**
@@ -32,6 +33,9 @@ public class RandomRestaurantRecPage implements Page {
         Restaurant res = inputManager.getRestaurantList().get(randomChoice);
 
         GraphicsGroup page = new GraphicsGroup();
+
+        Image background = new Image("final_recommendation.jpg");
+        page.add(background);
 
         GraphicsText name = new GraphicsText(res.getName());
         name.setCenter(canvasWidth/2, canvasHeight*0.2);
