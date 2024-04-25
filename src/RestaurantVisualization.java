@@ -55,7 +55,7 @@ public class RestaurantVisualization extends CanvasWindow {
         Button homeButton = new Button("Return to start");
         homeButton.setCenter(65, 15);
         homeButton.onClick(() -> {
-            
+            inputManager.clearSelections();
             RestaurantRecommendationPage.resetPage();
             try {
                 setPage(0);

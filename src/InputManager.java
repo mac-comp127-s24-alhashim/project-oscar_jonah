@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InputManager {
-    private String cuisine;
+    private String cuisine = "No preference";
     private int budget;
-    private double startLocation;
+    private double startLocation = 0;
 
     public InputManager() {
 
@@ -35,13 +35,23 @@ public class InputManager {
         System.out.println("Location: " + this.startLocation);
     }
 
+    public void clearSelections() {
+        startLocation = 0;
+        cuisine = "No preference";
+        budget = 0;
+    }
+
+    public String toString() {
+        return "location: " + startLocation + ", cuisine: " + cuisine + ", budget: " + budget;
+    }
+
     private List<Restaurant> makeRestaurantList() throws IOException {
         ArrayList<Restaurant> relevantRestaurants = new ArrayList<Restaurant>();
 
         int numOfRestaurants = SpreadSheetReader.getNumberOfRestaurants();
 
         for (int i=1; i<=numOfRestaurants; i++) {
-            if ((SpreadSheetReader.getInfo(i).get(1).equals(this.cuisine)) || (this.cuisine == null)) {
+            if ((SpreadSheetReader.getInfo(i).get(1).equals(this.cuisine)) || (this.cuisine == "No preference")) {
                 if (this.budget == 0) {
                     relevantRestaurants.add(SpreadSheetReader.makeRestaurantFromRowNumber(i));
                 }
@@ -55,23 +65,29 @@ public class InputManager {
 
     // sorts list according to distance from start point
     private List<Restaurant> orderRestaurantList() throws IOException {
-        List<Restaurant> orderedList = makeRestaurantList().stream() 
-        .sorted((i1,i2) -> {
-            Double distance1 = 0.0;
-            try {
-                distance1 = DistanceCalculator.getDistance(Double.parseDouble(i1.getZipCode()), this.startLocation);
-            } catch (NumberFormatException | IOException e) {
-                e.printStackTrace();
-            }
-            Double distance2 = 0.0;
-            try {
-                distance2 = DistanceCalculator.getDistance(Double.parseDouble(i2.getZipCode()), this.startLocation);
-            } catch (NumberFormatException | IOException e) {
-                e.printStackTrace();
-            }
-            return distance1.compareTo(distance2);
-        })
-        .collect(Collectors.toList());
+        List<Restaurant> orderedList;
+        if (this.startLocation != 0) {
+            orderedList = makeRestaurantList().stream() 
+            .sorted((i1,i2) -> {
+                Double distance1 = 0.0;
+                try {
+                    distance1 = DistanceCalculator.getDistance(Double.parseDouble(i1.getZipCode()), this.startLocation);
+                } catch (NumberFormatException | IOException e) {
+                    e.printStackTrace();
+                }
+                Double distance2 = 0.0;
+                try {
+                    distance2 = DistanceCalculator.getDistance(Double.parseDouble(i2.getZipCode()), this.startLocation);
+                } catch (NumberFormatException | IOException e) {
+                    e.printStackTrace();
+                }
+                return distance1.compareTo(distance2);
+            })
+            .collect(Collectors.toList());
+        }
+        else {
+            orderedList = makeRestaurantList();
+        }
 
         return orderedList;
     }

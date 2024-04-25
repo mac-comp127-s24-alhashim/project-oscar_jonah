@@ -47,6 +47,7 @@ public class HomePage implements Page {
         });
 
         randomChoice.onClick(() -> {
+            System.out.println(inputManager.toString());
             try {
                 canvas.setPage(3);
             } catch (IOException e) {

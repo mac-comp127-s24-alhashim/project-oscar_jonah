@@ -51,7 +51,7 @@ public class RestaurantRecommendationPage implements Page {
 
         GraphicsGroup page = new GraphicsGroup();
 
-        Button nextPage = ButtonHelper.createButton(page, ">", canvas.getWidth()-20, canvas.getHeight()/2);
+        Button nextPage = ButtonHelper.createButton(page, ">", canvas.getWidth()-30, canvas.getHeight()/2);
         nextPage.onClick(() -> {
             if (currentRest == restList.size()-1) {
                 currentRest = 0;
@@ -67,7 +67,7 @@ public class RestaurantRecommendationPage implements Page {
             }
         });
 
-        Button prevPage = ButtonHelper.createButton(page, "<", 20, canvas.getHeight()/2);
+        Button prevPage = ButtonHelper.createButton(page, "<", 30, canvas.getHeight()/2);
 
         prevPage.onClick(() -> {
             if (currentRest == 0) {
