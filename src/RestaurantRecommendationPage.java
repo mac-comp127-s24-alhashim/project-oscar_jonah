@@ -37,7 +37,22 @@ public class RestaurantRecommendationPage implements Page {
 
         if (this.restList.isEmpty() ) {
             restList = inputManager.getOrderedRestaurantList();
+            if (restList.isEmpty()) {
+                GraphicsGroup failPage = new GraphicsGroup();
+
+                Image background = new Image("blank_options.jpg");
+                failPage.add(background);
+
+                GraphicsText failMessage = new GraphicsText("We could not find any restaurants that are\n in your budget for that cuisine.");
+                failMessage.setAlignment(TextAlignment.CENTER);
+                failMessage.setCenter(canvas.getCenter());
+
+                failPage.add(failMessage);
+                return failPage;
+
+            }
         }
+        
 
         return updatePage(restList, inputManager);
         
