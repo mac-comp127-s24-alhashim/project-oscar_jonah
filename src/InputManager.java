@@ -65,6 +65,13 @@ public class InputManager {
 
     // sorts list according to distance from start point
     private List<Restaurant> orderRestaurantList() throws IOException {
+
+        double check = SpreadSheetReader.geoCode(startLocation, "latitude");
+        if (check == 0) {
+            System.out.println("Error caught!");
+            return List.of(new Restaurant("Fail", "", 0.0, "", new String [7], "", "", ""));
+        }
+
         List<Restaurant> orderedList;
         if (this.startLocation != 0) {
             orderedList = makeRestaurantList().stream() 

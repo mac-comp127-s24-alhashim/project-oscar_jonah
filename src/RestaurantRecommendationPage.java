@@ -17,7 +17,7 @@ public class RestaurantRecommendationPage implements Page {
     double canvasHeight;
     RestaurantVisualization canvas;
     static int currentRest = 0;
-    List<Restaurant> restList = List.of();
+    static List<Restaurant> restList = List.of();
 
     Restaurant restaurant;
 
@@ -35,7 +35,7 @@ public class RestaurantRecommendationPage implements Page {
     
     public GraphicsGroup makePage(InputManager inputManager) throws IOException {
 
-        if (this.restList.isEmpty() ) {
+        if (restList.isEmpty()) {
             restList = inputManager.getOrderedRestaurantList();
             if (restList.isEmpty()) {
                 GraphicsGroup failPage = new GraphicsGroup();
@@ -49,7 +49,19 @@ public class RestaurantRecommendationPage implements Page {
 
                 failPage.add(failMessage);
                 return failPage;
+            }
+            if (restList.get(0).getName() == "Fail") {
+                GraphicsGroup failPage = new GraphicsGroup();
 
+                Image background = new Image("blank_options.jpg");
+                failPage.add(background);
+
+                GraphicsText failMessage = new GraphicsText("The zipcode you put is invalid.");
+                failMessage.setAlignment(TextAlignment.CENTER);
+                failMessage.setCenter(canvas.getCenter());
+
+                failPage.add(failMessage);
+                return failPage;
             }
         }
         
@@ -60,6 +72,7 @@ public class RestaurantRecommendationPage implements Page {
 
     public static void resetPage() {
         currentRest = 0;
+        restList = List.of();
     }
 
     private GraphicsGroup updatePage(List<Restaurant> restList, InputManager inputManager) {
@@ -152,7 +165,7 @@ public class RestaurantRecommendationPage implements Page {
         for (char character: description.toCharArray()) {
             if (character == ' ') {
                 spaceCount += 1;
-                if (spaceCount%7==0) {
+                if (spaceCount%9==0) {
                     charList.add("\n");
                 }
                 else {
