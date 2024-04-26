@@ -1,7 +1,6 @@
 import java.io.IOException;
 
 import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.ui.Button;
 

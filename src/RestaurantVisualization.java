@@ -1,6 +1,5 @@
-
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.ui.Button;
 
 import java.awt.Color;
@@ -45,8 +44,7 @@ public class RestaurantVisualization extends CanvasWindow {
         this.removeAll();
 
         if ((page==3) || (page == 4)) {
-            GraphicsText loadingMessage = new GraphicsText("One moment, your recommendation is loading...");
-            loadingMessage.setCenter(canvasWidth/2, canvasHeight*0.7);
+            Image loadingMessage = new Image("loading_page.jpg");
             this.add(loadingMessage);
             this.draw();
         }
