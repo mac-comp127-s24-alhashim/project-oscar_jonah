@@ -3,6 +3,7 @@ import java.io.IOException;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 
@@ -33,7 +34,9 @@ public class LocationInputPage implements Page {
         Image background = new Image("blank_options.jpg");
         page.add(background);
 
-        GraphicsText locationPrompt = new GraphicsText("Where are you looking to eat?");
+        GraphicsText locationPrompt = new GraphicsText("Where are you looking to eat? \n Input a 5-digit zip code:");
+        locationPrompt.setFontSize(20);
+        locationPrompt.setAlignment(TextAlignment.CENTER);
         locationPrompt.setCenter(canvasWidth/2, canvasHeight*0.35);
         page.add(locationPrompt);
 

@@ -66,7 +66,6 @@ public class RestaurantRecommendationPage implements Page {
             try {
                 RestaurantFinder.getCanvas().setPage(4);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
