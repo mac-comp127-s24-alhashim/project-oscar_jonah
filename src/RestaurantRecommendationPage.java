@@ -137,7 +137,7 @@ public class RestaurantRecommendationPage implements Page {
         for (char character: description.toCharArray()) {
             if (character == ' ') {
                 spaceCount += 1;
-                if (spaceCount%9==0) {
+                if (spaceCount%7==0) {
                     charList.add("\n");
                 }
                 else {
