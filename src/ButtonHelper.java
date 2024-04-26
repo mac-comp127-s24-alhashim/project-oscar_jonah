@@ -14,8 +14,5 @@ public class ButtonHelper {
         button.setCenter(x, y);
         viz.add(button);
         return button;
-    }
-
-
-     
+    }  
 }

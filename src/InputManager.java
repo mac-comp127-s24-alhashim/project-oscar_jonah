@@ -98,19 +98,4 @@ public class InputManager {
 
         return orderedList;
     }
-     
-
-    public static void main(String args[]) throws IOException {
-        InputManager im = new InputManager();
-        im.setBudget(15);
-        im.setCuisine("American");
-        im.setLocation("55104");
-        List<Restaurant> restaurants = im.getOrderedRestaurantList();
-        System.out.println(restaurants.size());
-        for (Restaurant r : restaurants) {
-            System.out.println(r.getName() + " " + r.getCuisine() + " " + r.getPriceRange());
-        }
-
-        // System.out.println(DistanceCalculator.getDistance(55105, 55104));
-    }
 }

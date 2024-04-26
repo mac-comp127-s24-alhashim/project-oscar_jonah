@@ -143,11 +143,4 @@ public class SpreadSheetReader {
 
         return new Restaurant(name, cuisine, rating, priceRange, hours, description, location, zipCode);
     }
-    
-    public static void main(String[] args) throws IOException {
-        // Point zipCodePoint = SpreadSheetReader.zipCodePoint(55105);
-        // System.out.println("Longitude: " + zipCodePoint.getX() + ". Latitude: " + zipCodePoint.getY());
-        // System.out.println(SpreadSheetReader.getNumberOfRestaurants());
-        System.out.println(SpreadSheetReader.makeRestaurantFromRowNumber(1).getName());
-    }
 }

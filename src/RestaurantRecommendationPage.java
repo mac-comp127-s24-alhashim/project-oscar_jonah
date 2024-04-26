@@ -75,7 +75,7 @@ public class RestaurantRecommendationPage implements Page {
         restList = List.of();
     }
 
-    private GraphicsGroup updatePage(List<Restaurant> restList, InputManager inputManager) {
+    private GraphicsGroup updatePage(List<Restaurant> restList, InputManager inputManager) throws IOException {
         Restaurant restaurantChoice = restList.get(currentRest);
 
         GraphicsGroup page = new GraphicsGroup();
