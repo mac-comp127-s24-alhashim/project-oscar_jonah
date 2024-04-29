@@ -27,6 +27,10 @@ public class RandomRestaurantRecPage implements Page {
         this.canvas = canvas;
     }
     
+    /**
+     * Generates the random recommendation page
+     * @param inputManager the inputManager for all the page classes
+     */
     public GraphicsGroup makePage(InputManager inputManager) throws IOException {
 
         int randomChoice = (int) ((Math.random() * (30 - 1)) + 1);
@@ -82,6 +86,10 @@ public class RandomRestaurantRecPage implements Page {
         return page;
     }
 
+    /**
+     * Fits the restaurant's description to the canvas window to avoid design flaws
+     * @param description a string with the restaurant description
+     */
     private String formatDescription(String description) {
         int spaceCount = 1;
         ArrayList<String> charList = new ArrayList<>();

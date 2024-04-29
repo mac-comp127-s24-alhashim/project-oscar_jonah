@@ -22,6 +22,10 @@ public class HomePage implements Page {
         this.canvas = canvas;
     }
 
+    /**
+     * Generates the home page
+     * @param inputManager the inputManager for all the page classes
+     */
     public GraphicsGroup makePage(InputManager inputManager) {
 
         GraphicsGroup page = new GraphicsGroup();
@@ -42,7 +46,6 @@ public class HomePage implements Page {
         });
 
         randomChoice.onClick(() -> {
-            System.out.println(inputManager.toString());
             try {
                 canvas.setPage(3);
             } catch (IOException e) {

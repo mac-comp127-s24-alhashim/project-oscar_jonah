@@ -19,8 +19,6 @@ public class SpreadSheetReader {
      * @param rowNum the index of the restaurant as it appears in the xlsx file, from 1 to 30
      * @param type the type of information we want to get from the restaurant (name, cuisine, rating, range, address, zip code, or description)
      */
-
-     
     public static List<String> getInfo(int rowNum) throws IOException {
         List<String> information = new ArrayList<>();
         String excelPathFile = "./res/RestaurantData.xlsx";
@@ -129,6 +127,10 @@ public class SpreadSheetReader {
         return count - 1;
     }
 
+    /**
+     * Returns the desired restaurant based on its index in the spreadsheet
+     * @param i the index of the restaurant in the spreadsheet
+     */
     public static Restaurant makeRestaurantFromRowNumber(int i) throws IOException {
         List<String> restInfo = getInfo(i);
         String name = restInfo.get(0);
