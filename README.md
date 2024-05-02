@@ -12,6 +12,8 @@ A program that gives a restaurant recommendation according to the user's prefere
 1. Select "Return to start" to get restart the recommendation process, or exit the program.
 
 ## Video demonstration
+https://github.com/mac-comp127-s24-alhashim/project-oscar_jonah/assets/110639308/1b976cf4-d51e-4671-b6c5-33455400a8a2
+
 
 
 ## Initial project proposal
