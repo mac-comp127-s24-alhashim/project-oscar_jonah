@@ -1,5 +1,5 @@
 # Where to Eat - Twin Cities
-By [Oscar Reza Bautista](https://github.com/oscarrezab) and [Jonah Zimmer](https://github.com/crunchy-nutella)
+By [Oscar Reza Bautista](https://github.com/oscarrezab) and [Jonah Zimmer](https://github.com/jzim4)
 
 ## Description
 A program that gives a restaurant recommendation according to the user's preferences of price, cuisine, and location. The recommendations come from a manually-made spreadsheet containing 30 restaurants in the Twin Cities.
@@ -12,8 +12,7 @@ A program that gives a restaurant recommendation according to the user's prefere
 1. Select "Return to start" to get restart the recommendation process, or exit the program.
 
 ## Video demonstration
-https://github.com/mac-comp127-s24-alhashim/project-oscar_jonah/assets/110639308/1b976cf4-d51e-4671-b6c5-33455400a8a2
-
+Found [here](https://drive.google.com/file/d/10ANlurQarkEUgYE6rX_ma4BnzRL2sPNq/view?usp=drive_link)
 
 
 ## Initial project proposal
